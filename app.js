@@ -1,12 +1,13 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import router from './routes/user-routes';
 const app = express();
 
 //database
 mongoose
   .connect('mongodb://0.0.0.0:27017/')
   .then(() => {
-    app.listen(4000);
+    app.listen(5000);
   })
   .then(() => {
     console.log('connected to database and listening to port 4000');
@@ -16,6 +17,4 @@ mongoose
   });
 
 //middleware
-app.use('/api', (req, res, next) => {
-  res.send('Api ');
-});
+app.use("/api/user" ,router);
