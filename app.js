@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import router from './routes/user-routes';
 const app = express();
 
+app.use(express.json())
 //database
 mongoose
   .connect('mongodb://0.0.0.0:27017/')

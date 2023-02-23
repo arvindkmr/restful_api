@@ -21,6 +21,7 @@ export const signup = async (req, res, next) => {
   try {
     existingUser = await User.findOne({ email });
   } catch (err) {
+   return
     console.log(err);
   }
   if (existingUser) {
@@ -35,7 +36,7 @@ export const signup = async (req, res, next) => {
     user.save();
     console.log("user saved in data base")
   } catch (err) {
-    console.log(err);
+   return console.log(err);
   }
   return res.status(201).json({user})
 };
