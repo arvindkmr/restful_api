@@ -1,6 +1,6 @@
 import User from '../model/User';
 import bcrypt from 'bcryptjs';
-import e from 'express';
+
 export const getAllUsers = async (req, res, next) => {
   let users;
 
@@ -37,7 +37,6 @@ export const signup = async (req, res, next) => {
 
   try {
     user.save();
-    console.log('user saved in data base');
   } catch (err) {
     return console.log(err);
   }
