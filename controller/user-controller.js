@@ -46,19 +46,22 @@ export const signup = async (req, res, next) => {
 };
 
 export const login = async (req, res, next) => {
-  const { user, password } = req.body;
+  const { email, password } = req.body;
   let existingUser;
   try {
-    existingUser = User.findOne({ email });
+    existingUser = await User.findOne({ email });
   } catch (err) {
     return console.log(err);
   }
   if (!existingUser) {
     return res.status(404).json({ message: 'user not registered yet' });
   }
-  const isPasswordCorrect = bcrypt.compareSync(password, existingUser.password);
-  if(!isPasswordCorrect){
-res.status(400).json({message:"Incorrect Password"})
+  const isPasswordCorrect = await bcrypt.compareSync(
+    password,
+    existingUser.password
+  );
+  if (!isPasswordCorrect) {
+    res.status(400).json({ message: 'Incorrect Password' });
   }
-  return res.status(200).json({messgae:"login sucessfull"})
+  return res.status(200).json({ messgae: 'login sucessfull' });
 };
